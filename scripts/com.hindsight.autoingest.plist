@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.hindsight.autoingest</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>__HOME__/.hindsight/deployment/auto-ingest.sh</string>
+  </array>
+
+  <!-- One pass every 15 minutes. The script exits immediately when a bulk
+       ingest, a build, or a pause marker is in play, so a short interval costs
+       nothing and keeps merged work from sitting unindexed for long. -->
+  <key>StartInterval</key>
+  <integer>900</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <false/>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>__HOME__/.nvm/versions/node/v24.21.0/bin:__HOME__/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>__HOME__</string>
+
+  <key>StandardOutPath</key>
+  <string>__HOME__/.hindsight/logs/auto-ingest.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/.hindsight/logs/auto-ingest.out.log</string>
+</dict>
+</plist>

@@ -1,0 +1,19 @@
+# Local state and secrets. config.env holds the forge owner and any token and
+# lives outside the clone by design; this entry is belt-and-braces for anyone
+# who copies it in.
+config.env
+*.state
+*.queue
+*.repo
+*.paused
+*.disabled
+llm.profile
+logs/
+*.log
+
+.DS_Store
+__pycache__/
+*.pyc
+*.tmp
+*.new
+*.orig

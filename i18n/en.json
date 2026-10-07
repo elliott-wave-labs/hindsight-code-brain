@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "locale": "en",
+    "name": "English",
+    "note": "Source locale. Every other file is a translation of this one; keys here are the canonical set."
+  },
+
+  "status.running": "running",
+  "status.paused": "paused — ingest stopped, brain still queryable",
+  "status.resuming": "resuming…",
+  "status.model_up": "model: %1$s slots, up",
+  "status.model_down": "model: down",
+  "status.bank": "bank: %1$s nodes, %2$s documents",
+  "status.console_at": "console: %1$s",
+
+  "pin.done": "pinned %1$s on branch %2$s (%3$s commits)",
+  "pin.not_found": "no repository named %1$s under the clone root",
+  "pin.branch_guess": "branch not given — using the remote default, %1$s",
+
+  "ingest.start": "ingesting %1$s",
+  "ingest.pass_result.one": "pass %1$s: 1 new memory in %2$ss",
+  "ingest.pass_result.other": "pass %1$s: %3$s new memories in %2$ss",
+  "ingest.repo_complete": "%1$s complete — %2$s commits ingested",
+  "ingest.skip_bulk": "skipped — a bulk ingest is already running",
+  "ingest.skip_build": "skipped — a build is using the machine",
+  "ingest.skip_paused": "skipped — %1$s is set",
+  "ingest.skip_model_down": "skipped — the model is not loaded",
+  "ingest.lock_held": "another run holds the bank lock — waiting %1$ss",
+  "ingest.extractions_failed": "%1$s extractions failed — not counting this pass as clean",
+  "ingest.extractions_pending": "%1$s extractions still running at the drain timeout — not counting this pass as clean",
+
+  "throttle.to_reduced": "a build started — dropping the model to %1$s slots",
+  "throttle.to_full": "the machine is idle — taking the model back to %1$s slots",
+
+  "watchdog.model_down": "the model is not responding — reloading it",
+  "watchdog.model_wedged": "the model is wedged: healthy, work queued, no progress — reloading it",
+
+  "error.daemon_unreachable": "cannot reach the memory daemon at %1$s",
+  "error.config_missing": "no configuration at %1$s — run install.sh first",
+  "error.org_unset": "set ORG in %1$s before ingesting pull requests"
+}

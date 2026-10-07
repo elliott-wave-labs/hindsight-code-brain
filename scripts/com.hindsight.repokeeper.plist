@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>HOME</key>
+		<string>HOME_DIR</string>
+		<key>PATH</key>
+		<string>NODE_BIN:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+	</dict>
+	<key>Label</key>
+	<string>com.hindsight.repokeeper</string>
+	<key>Nice</key>
+	<integer>10</integer>
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>__HOME__/.hindsight/deployment/repo-keeper.sh</string>
+	</array>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardErrorPath</key>
+	<string>HOME_DIR/.hindsight/logs/launchd.err.log</string>
+	<key>StandardOutPath</key>
+	<string>HOME_DIR/.hindsight/logs/launchd.out.log</string>
+	<key>StartInterval</key>
+	<integer>21600</integer>
+	<key>WatchPaths</key>
+	<array>
+		<string>CLONE_ROOT_DIR</string>
+	</array>
+</dict>
+</plist>

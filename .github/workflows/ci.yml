@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The private-identifier list is not in this repository, so CI runs the
+      # structural half of the gate: absolute home paths and credential-shaped
+      # strings. Those are the checks that catch a mistake made by someone who
+      # never had the private list, which is everyone contributing here.
+      - name: no leaked paths or credentials
+        run: ./scripts/check-clean.sh
+
+      - name: shell syntax
+        run: |
+          for f in scripts/*.sh scripts/lib/*.sh; do
+            [ -e "$f" ] || continue
+            bash -n "$f"
+          done
+
+      - name: shellcheck
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          # Informational: these scripts target bash 3.2 on macOS and
+          # shellcheck's defaults assume a newer, more Linux-shaped world.
+          shellcheck -S warning scripts/*.sh scripts/lib/*.sh || true
+
+      - name: python syntax
+        run: python3 -m compileall -q scripts
+
+      - name: locale files agree with en.json
+        run: ./scripts/check-i18n.sh
+
+      - name: launch agent plists are valid and carry no real paths
+        run: |
+          for p in scripts/*.plist; do
+            [ -e "$p" ] || continue
+            python3 - "$p" <<'PY'
+          import plistlib, sys
+          path = sys.argv[1]
+          with open(path, "rb") as fh:
+              plistlib.load(fh)
+          # A plist cannot expand $HOME, so the tracked copy must carry the
+          # placeholder the installer substitutes. A plist with a real path in
+          # it is a plist that leaked someone's username.
+          if "__HOME__" not in open(path).read():
+              sys.exit(f"{path}: no __HOME__ placeholder — did a real path get committed?")
+          print(f"  {path} ok")
+          PY
+          done
