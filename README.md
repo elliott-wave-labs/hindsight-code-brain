@@ -237,6 +237,21 @@ that", "what was rejected", or "when did this change".
 
 ---
 
+## Does it actually help?
+
+[docs/case-study.md](docs/case-study.md) measures a real estate — the client,
+backend, contracts and Terraform of a popular social live-streaming app, 17
+repositories and 46,871 memory units, anonymized.
+
+The headline measurement: **every protocol contract in active use spans at
+least two repositories, 80% span three or more, and 78% cross a
+client/backend/infrastructure boundary.** A coding agent pointed at one
+repository is reasoning from one side of an agreement whose other side it
+cannot see.
+
+That document is also explicit about what has *not* been measured — there is no
+controlled benchmark of agent accuracy yet, and the case study says so.
+
 ## Coming in v2
 
 **Reactive ingest instead of polling.** A merge is an event the forge already
